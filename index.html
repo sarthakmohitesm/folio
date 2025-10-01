@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Journalist Name</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation - Professional Style */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid rgba(128, 128, 128, 0.3);
+        }
+
+        nav.scrolled {
+            background: rgba(20, 20, 20, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li:last-child {
+            border-right: none;
+        }
+
+        nav a {
+            display: block;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 18px 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 16px;
+            text-transform: capitalize;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover{
+            background: rgba(128, 128, 128, 0.2);
+            color: #ffffff;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #808080, #ffffff);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::before {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 8rem 2rem 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #b0b0b0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            animation: slideIn 1s ease 0.2s both;
+            font-family: 'Georgia', serif;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #ffffff;
+            animation: slideIn 1s ease 0.4s both;
+            font-family: 'Georgia', serif;
+            font-weight: 300;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Profile Section */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+         .profile-image {
+            position: relative;
+        }
+
+        .profile-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #666666;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .profile-image img:hover {
+            transform: scale(1.05);
+            border-color: #ffffff;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-text {
+            animation: slideIn 1s ease 0.6s both;
+        }
+
+        .profile-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #cccccc;
+        }
+
+        .profile-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #aaaaaa;
+            margin-bottom: 1rem;
+        }
+
+        .credentials {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .credential-item {
+            background: rgba(128, 128, 128, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #808080;
+        }
+
+        .credential-item strong {
+            color: #ffffff;
+        }
+
+        /* YouTube Channel Section */
+        .youtube-showcase {
+            margin-top: 2rem;
+        }
+
+        .youtube-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .youtube-screenshot-container {
+            position: relative;
+            aspect-ratio: 16/9;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(80, 80, 80, 0.3), rgba(60, 60, 60, 0.6));
+            border: 3px solid rgba(128, 128, 128, 0.3);
+            transition: all 0.5s ease;
+            cursor: pointer;
+        }
+
+        .youtube-screenshot-container:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 0, 0, 0.2);
+            border-color: rgba(255, 0, 0, 0.6);
+        }
+
+        .youtube-screenshot-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.8s ease;
+            z-index: 1;
+        }
+
+        .youtube-screenshot-container:hover::before {
+            transform: translateX(100%);
+        }
+
+        .youtube-screenshot-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            animation: pulse 2s infinite;
+
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .youtube-screenshot-placeholder p {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+        }
+
+        .youtube-screenshot-placeholder span {
+            font-size: 1rem;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .youtube-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            background: rgba(128, 128, 128, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Updated Content Management Section - Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .content-item {
+            background: linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(80, 80, 80, 0.5));
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+            position: relative;
+            aspect-ratio: 1;
+        }
+
+        .content-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #606060, #ffffff, #606060);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: 2;
+        }
+
+        .content-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .content-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(128, 128, 128, 0.2);
+            border-color: rgba(128, 128, 128, 0.5);
+        }
+
+        .content-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .content-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: rgba(40, 40, 40, 0.9);
+        }
+
+        /* Video controls styling */
+        .content-item video::-webkit-media-controls-panel {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .content-item video::-webkit-media-controls-play-button,
+        .content-item video::-webkit-media-controls-mute-button {
+            background-color: rgba(128, 128, 128, 0.8);
+            border-radius: 50%;
+        }
+
+        .content-item video::-webkit-media-controls-timeline {
+            background-color: rgba(128, 128, 128, 0.3);
+            border-radius: 25px;
+        }
+
+        /* Articles/Work Section - Slider Design */
+        .articles-slider-container {
+            position: relative;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+
+        .articles-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: rgba(60, 60, 60, 0.9);
+            border-radius: 20px;
+            overflow: hidden;
+            min-width: 350px;
+            max-width: 350px;
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+            border: 2px solid rgba(128, 128, 128, 0.3);
+        }
+
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(128, 128, 128, 0.3);
+            border-color: rgba(128, 128, 128, 0.6);
+        }
+
+        .article-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-content h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+            line-height: 1.3;
+        }
+
+        .article-content p {
+            color: #cccccc;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #b0b0b0;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Slider Navigation */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(128, 128, 128, 0.2);
+            border: 2px solid rgba(128, 128, 128, 0.4);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-nav:hover {
+            background: rgba(128, 128, 128, 0.4);
+            border-color: rgba(128, 128, 128, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: -25px;
+        }
+
+        .slider-nav.next {
+            right: -25px;
+        }
+
+        .slider-nav svg {
+            width: 20px;
+            height: 20px;
+            fill: #ffffff;
+        }
+
+        /* Slider Indicators */
+        .slider-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(128, 128, 128, 0.3);
+            border: 2px solid rgba(128, 128, 128, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: rgba(128, 128, 128, 0.8);
+            border-color: #ffffff;
+            transform: scale(1.2);
+        }
+
+        /* Expertise/Hobbies Section */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .expertise-card {
+            background: linear-gradient(135deg, rgba(128, 128, 128, 0.1), rgba(160, 160, 160, 0.05));
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(128, 128, 128, 0.1), transparent);
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .expertise-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(128, 128, 128, 0.25);
+            border-color: rgba(128, 128, 128, 0.5);
+        }
+
+        .expertise-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #b0b0b0;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .expertise-card:hover .expertise-icon {
+            color: #ffffff;
+            transform: scale(1.2);
+        }
+
+        .expertise-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .expertise-card p {
+            color: #d4d4d4;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(50, 50, 50, 0.6);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
+            border-color: #b0b0b0;
+            box-shadow: 0 15px 35px rgba(128, 128, 128, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            color: #b0b0b0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            color: #ffffff;
+            transform: scale(1.15);
+        }
+
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+        }
+
+        .contact-item p {
+            color: #d4d4d4;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: rgba(128, 128, 128, 0.1);
+            border-radius: 12px;
+            color: #b0b0b0;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, rgba(128, 128, 128, 0.2), rgba(160, 160, 160, 0.2));
+            color: #ffffff;
+            transform: translateY(-5px) scale(1.05);
+            border-color: #b0b0b0;
+            box-shadow: 0 10px 25px rgba(128, 128, 128, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .youtube-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .youtube-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav li {
+                border-right: none;
+                border-bottom: 1px solid rgba(205, 133, 63, 0.3);
+            }
+
+            nav li:last-child {
+                border-bottom: none;
+            }
+
+            nav a {
+                padding: 15px 20px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image img {
+                width: 280px;
+                height: 280px;
+            }
+
+            section {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .credentials {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .social-links {
+                gap: 1.5rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .youtube-screenshot-placeholder p {
+                font-size: 1.2rem;
+            }
+
+            .upload-icon {
+                font-size: 3rem;
+            }
+        }
+
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Particle background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(128, 128, 128, 0.4);
+            border-radius: 50%;
+            animation: float-particle 8s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        #yt1{
+            background-image: url("youtube1.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #yt2{
+            background-image: url("youtube2.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #b0b0b0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .read-more-btn:hover {
+            background: linear-gradient(135deg, #c53030, #9c2626);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.3);
+        }
+
+        .read-more-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+
+/* Additional content styling with transparent box */
+.additional-content {
+    margin-top: 3rem;
+}
+
+.beyond-youtube-box {
+    background: linear-gradient(135deg, rgba(40, 40, 40, 0.8), rgba(60, 60, 60, 0.6));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 100%;
+}
+
+.beyond-youtube-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent, rgba(128, 128, 128, 0.02));
+    pointer-events: none;
+}
+
+.beyond-youtube-box h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.beyond-youtube-box p {
+    color: #d0d0d0;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.beyond-youtube-box p:last-child {
+    margin-bottom: 0;
+}
+
+.beyond-youtube-box strong {
+    color: #ffffff;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #f0f0f0);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+        
+.article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #b0b0b0;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .read-more-btn {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .read-more-btn:hover {
+            background: linear-gradient(135deg, #c53030, #9c2626);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 62, 62, 0.3);
+        }
+
+        .read-more-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+
+
+
+
+
+
+        /* Content Management Section - 4x3 Grid with Horizontal Scroll */
+        .content-grid-container {
+            margin-top: 2rem;
+            width: 100%;
+            position: relative;
+        }
+
+        .content-grid-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(128, 128, 128, 0.6) rgba(40, 40, 40, 0.3);
+        }
+
+        /* Custom Webkit Scrollbar */
+        .content-grid-wrapper::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .content-grid-wrapper::-webkit-scrollbar-track {
+            background: rgba(40, 40, 40, 0.3);
+            border-radius: 6px;
+        }
+
+        .content-grid-wrapper::-webkit-scrollbar-thumb {
+            background: linear-gradient(90deg, rgba(128, 128, 128, 0.6), rgba(160, 160, 160, 0.8));
+            border-radius: 6px;
+            border: 2px solid rgba(40, 40, 40, 0.3);
+        }
+
+        .content-grid-wrapper::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(90deg, rgba(128, 128, 128, 0.8), rgba(160, 160, 160, 1));
+        }
+
+        /* Grid Layout */
+        .content-grid {
+            display: grid;
+            grid-template-rows: repeat(2, 1fr);
+            grid-auto-flow: column;
+            grid-auto-columns: 280px;
+            gap: 1.5rem;
+            min-height: 600px;
+            width: fit-content;
+            padding-right: 2rem;
+        }
+
+        /* Content Items */
+        .content-item {
+            background: linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(80, 80, 80, 0.5));
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(128, 128, 128, 0.2);
+            position: relative;
+            aspect-ratio: 1;
+            width: 280px;
+            height: 280px;
+        }
+
+        .content-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #606060, #ffffff, #606060);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: 2;
+        }
+
+        .content-item:hover::before {
+            transform: translateX(0);
+        }
+
+        .content-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(128, 128, 128, 0.2);
+            border-color: rgba(128, 128, 128, 0.5);
+        }
+
+        /* Image Styling */
+        .content-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .content-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Video Styling */
+        .content-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: rgba(40, 40, 40, 0.9);
+        }
+
+        /* Video Controls Styling */
+        .content-item video::-webkit-media-controls-panel {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .content-item video::-webkit-media-controls-play-button,
+        .content-item video::-webkit-media-controls-mute-button {
+            background-color: rgba(128, 128, 128, 0.8);
+            border-radius: 50%;
+        }
+
+        .content-item video::-webkit-media-controls-timeline {
+            background-color: rgba(128, 128, 128, 0.3);
+            border-radius: 25px;
+        }
+
+        /* Basic page styling for demo */
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: #ffffff;
+            font-family: 'Georgia', serif;
+            font-weight: 300;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .content-grid {
+                grid-auto-columns: 250px;
+            }
+            .content-item {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-auto-columns: 220px;
+                grid-template-rows: repeat(2, 1fr);
+                min-height: 460px;
+            }
+            .content-item {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-auto-columns: 200px;
+                grid-template-rows: repeat(2, 1fr);
+                min-height: 420px;
+            }
+            .content-item {
+                width: 200px;
+                height: 200px;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+
+
+        /* Articles Scroll Container - Horizontal Scrollbar */
+.articles-scroll-container {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.articles-scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 1.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.6) rgba(40, 40, 40, 0.3);
+    cursor: grab;
+    user-select: none;
+}
+
+.articles-scroll-wrapper:active {
+    cursor: grabbing;
+}
+
+/* Custom Webkit Scrollbar for Articles */
+.articles-scroll-wrapper::-webkit-scrollbar {
+    height: 14px;
+}
+
+.articles-scroll-wrapper::-webkit-scrollbar-track {
+    background: rgba(40, 40, 40, 0.4);
+    border-radius: 7px;
+    margin: 0 20px;
+}
+
+.articles-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(128, 128, 128, 0.7), rgba(160, 160, 160, 0.9));
+    border-radius: 7px;
+    border: 3px solid rgba(40, 40, 40, 0.4);
+    transition: background 0.3s ease;
+}
+
+.articles-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(90deg, rgba(128, 128, 128, 0.9), rgba(180, 180, 180, 1));
+}
+
+.articles-slider {
+    display: flex;
+    gap: 2rem;
+    width: fit-content;
+    padding: 0 20px;
+}
+
+/* Hide old slider navigation elements */
+.slider-nav,
+.slider-indicators {
+    display: none !important;
+}
+
+
+
+
+/* Expertise/Featured Work Section */
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.expertise-card {
+    position: relative;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 2px solid rgba(128, 128, 128, 0.2);
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.expertise-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(128, 128, 128, 0.25);
+    border-color: rgba(128, 128, 128, 0.5);
+}
+
+.expertise-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+.expertise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
+    opacity: 0;
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.expertise-card:hover .expertise-bg {
+    filter: blur(8px);
+    transform: scale(1.1);
+}
+
+.expertise-card:hover .expertise-overlay {
+    opacity: 1;
+}
+
+.expertise-content {
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.5s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.expertise-card:hover .expertise-content {
+    transform: translateY(0);
+}
+
+.expertise-content h4 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-weight: 600;
+}
+
+.expertise-content p {
+    color: #e0e0e0;
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .expertise-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    
+    .expertise-card {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .expertise-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .expertise-card {
+        height: 300px;
+    }
+    
+    .expertise-content h4 {
+        font-size: 1.5rem;
+    }
+    
+    .expertise-content p {
+        font-size: 0.9rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#youtube">YouTube</a></li>
+            <li><a href="#content">Content</a></li>
+            <li><a href="#articles">Articles</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- About/Profile Section -->
+    <section id="about">
+        <div class="container">
+            <h1>Avantika Kansal</h1>
+            <div class="profile-content">
+                <div class="profile-image">
+                    <img src="profile.jpeg" alt="Professional Headshot">
+                </div>
+                <div class="profile-text">
+                    
+                    <p>Avantika Kansal is a Journalist, Political Commentator, and Content Creator working at the intersection of national politics, policy, and geopolitics. With a sharp analytical approach and a passion for making complex issues accessible, she brings critical insights to public discourse.</p>
+                    
+                    <p>
+                        <a href="https://your-avvanteeka-link.com" target="_blank" rel="noopener noreferrer"></a><b>Avvanteeka</b> – A platform dedicated to politics, public policy, and international affairs, where Avantika breaks down contemporary developments and offers nuanced analysis for her audience.
+                    </p>
+                    
+                    <p>
+                        <a href="https://your-review-show-link.com" target="_blank" rel="noopener noreferrer"></a><b>Review with Avantika Kansal</b> – A conversational space where she explores books, ideas, and stories with thought leaders and changemakers, providing viewers with deep insights and engaging discussions.
+                    </p>
+
+                    <p>
+            Avantika also hosts The Global Lens with Avantika, a show that explores diverse perspectives on international relations and policy shifts, and Chapters and Curtains with Avantika Kansal, a platform which brings forward inspiring personal journeys, literature, and creative voices.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Channel Section -->
+    <section id="youtube">
+        <div class="container">
+            <h2>YouTube Channels</h2>
+            <div class="youtube-showcase animate-on-scroll">
+                <div class="youtube-grid">
+                    <a href="https://www.youtube.com/@Avvanteeka" target="_blank" class="youtube-link">
+                        <div class="youtube-screenshot-container">
+                            <div class="youtube-screenshot-placeholder" id="yt1">
+                                <div class="upload-icon"></div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="https://www.youtube.com/@avantikakansal" target="_blank" class="youtube-link">
+                        <div class="youtube-screenshot-container">
+                            <div class="youtube-screenshot-placeholder" id="yt2">
+                                <div class="upload-icon"></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+           <div class="additional-content">
+        <div class="beyond-youtube-box">
+            <p>
+                In addition, she regularly hosts seminars at universities and colleges and actively participates in ground events wherever her expertise is required. Avantika has studied Public Policy at IIM Calcutta and is a Geopolitics Fellow with IMPRI (Impact and Policy Research Institute).
+            </p>
+            
+            <p>
+                In the past, she has worked with leading Indian think tanks and continues to remain actively engaged with them, contributing to research, policy dialogues, and strategic discussions on national and global issues. Through her journalism, content creation, and policy engagements, Avantika Kansal bridges the gap between governance, geopolitics, and citizen understanding, creating narratives that inform, inspire, and provoke thought.
+            </p>
+
+            <p>
+                Avantika has studied Public Policy at IIM Calcutta and is a Geopolitics Fellow with IMPRI (Impact and Policy Research Institute). In the past, she has worked with leading Indian think tanks and continues to remain actively engaged with them, contributing to research, policy dialogues, and strategic discussions on national and global issues.
+            </p>
+
+            <p>
+                Through her journalism, content creation, and policy engagements, Avantika Kansal bridges the gap between governance, geopolitics, and citizen understanding, creating narratives that inform, inspire, and provoke thought.
+            </p>
+        </div>
+    </div>
+        </div>
+    </section>
+
+ <!-- Articles/Work Section -->
+<section id="articles">
+    <div class="container">
+        <h2>Featured Articles & Reports</h2>
+        <div class="articles-scroll-container animate-on-scroll">
+            <div class="articles-scroll-wrapper">
+                <div class="articles-slider" id="articlesSlider">
+                    <div class="article-card">
+                        <div class="article-image">
+                            <div class="youtube-thumbnail-placeholder" data-video-id="">
+                                <div class="youtube-placeholder-content">
+                                    <div class="youtube-play-button">▶</div>
+                                    <p>YouTube Video Thumbnail</p>
+                                    <span>Add video ID to load thumbnail</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h4>Zee News Work</h4>
+                            <p>here the small info should get add <br><br><br><br><br><br><br><br><br></p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.linkedin.com/posts/avantika-kansal-b6867938_work-anchoring-anchor-activity-6988862353987522560-6q0j?utm_source=share&utm_medium=member_desktop&rcm=ACoAAAfuAkABhB1P7pA1jtYkW3-5yGS8DzjTJZo" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch More
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/waUJdt_L_tA/maxresdefault.jpg" alt="BKDF Video Links">
+                        </div>
+                        <div class="article-content">
+                            <h4>BKDF Video Links</h4>
+                            <p>Covered the Lok Sabha Elections 2024 from various constituencies across India, focusing on key issues, voter sentiments, and regional dynamics. Explored how local narratives shaped national discourse during this pivotal election. Captured stories from the ground — beyond headlines and soundbites. A deep dive into democracy, one constituency at a time.</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=waUJdt_L_tA" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/4BBQ--IAxfc/maxresdefault.jpg" alt="Political Hosting and Anchoring">
+                        </div>
+                        <div class="article-content">
+                            <h4>Political Hosting and Anchoring</h4>
+                            <p>Engaged in political hosting and anchoring across key events, election cycles, and issue-based discussions. Moderated live debates, ground reports, and interviews with policymakers, political analysts, and citizens. Focused on simplifying complex political narratives and amplifying grassroots voices. Created space for informed, balanced, and issue-driven conversations during pivotal national moments.</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=4BBQ--IAxfc" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/zwr1sCTTo6c/maxresdefault.jpg" alt="In Conversation with Former CM of Tamil Nadu">
+                        </div>
+                        <div class="article-content">
+                            <h4>In Conversation with Former CM of Tamil Nadu</h4>
+                            <p>In Conversation with Former CM of Tamil Nadu _ OPS during Lok Sabha Elections 2024</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=zwr1sCTTo6c" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/-26BfZdGF6A/maxresdefault.jpg" alt="In Conversation with Suresh Gopi">
+                        </div>
+                        <div class="article-content">
+                            <h4>In Conversation with Suresh Gopi</h4>
+                            <p>In Conversation with Suresh Gopi from his LS Constituency Thrissur during his campaigning for LS Elections 2024</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=-26BfZdGF6A" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/t-HTV5FXZoU/maxresdefault.jpg" alt="Aspirational Districts and Block Program">
+                        </div>
+                        <div class="article-content">
+                            <h4>Aspirational Districts and Block Program: Empowering New India</h4>
+                            <p>Documentary on _ The Aspirational Districts and Block Program, under which the quality of life for over 25 crore people across 112 districts has changed, is making strides in enhancing the Aspirational Block Program which applies to 500 Blocks, a pioneering initiative under the visionary leadership of Prime Minister Narendra Modi.</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=t-HTV5FXZoU" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/Do_15ha3zyk/maxresdefault.jpg" alt="In Conversation with Ex Union Minister Smriti Irani">
+                        </div>
+                        <div class="article-content">
+                            <h4>In Conversation with Ex Union Minister Smriti Irani</h4>
+                            <p>In Conversation with Ex Union Minister Smriti Irani in Amethi during Lok Sabha Elections 2024</p>
+                            <div class="article-meta"></div>
+                            <a href="https://www.youtube.com/watch?v=Do_15ha3zyk" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://img.youtube.com/vi/90uyfmcv53U/maxresdefault.jpg" alt="Ground Stories from Kashmir">
+                        </div>
+                        <div class="article-content">
+                            <h4>Ground Stories from Kashmir</h4>
+                            <p>Ground Stories from Lal Chowk Kashmir on Abrogation on Article 370!</p>
+                            <div class="article-meta">
+                                <span>Published: 2024</span>
+                                <span>Ground Report</span>
+                            </div>
+                            <a href="https://www.youtube.com/watch?v=90uyfmcv53U" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Watch Video
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-card">
+                        <div class="article-image">
+                            <div class="youtube-thumbnail-placeholder" data-video-id="">
+                                <div class="youtube-placeholder-content">
+                                    <div class="youtube-play-button">📝</div>
+                                    <p>Blog Articles</p>
+                                    <span>Personal thoughts and insights</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <h4>Avantika's Thoughts Blog</h4>
+                            <p>Personal blog featuring thoughts on politics, policy analysis, and contemporary issues. A space for deeper reflection and detailed commentary on current affairs.</p>
+                            <div class="article-meta">
+                                <span>Updated regularly</span>
+                                <span>Blog Posts</span>
+                            </div>
+                            <a href="https://avantikasthoughts.home.blog/" target="_blank" class="read-more-btn">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                Read Blog
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Content Management Section -->
+        <section id="content">
+            <div class="container">
+                <h2>Content Management</h2>
+                <div class="content-grid-container">
+                    <div class="content-grid-wrapper">
+                        <div class="content-grid">
+                            <!-- Image Content Items -->
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Breaking News Coverage">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Photo Journalism">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (3).jpg" alt="Field Reporting">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Data Analysis">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Interview Setup">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Research Work">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Press Conference">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Live Broadcasting">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Studio Recording">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Outdoor Interview">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (3).jpg" alt="Panel Discussion">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Research Documentation">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Equipment Setup">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (2).jpg" alt="Script Writing">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Content Planning">
+                            </div>
+                            <div class="content-item">
+                                <img src="bts (1).jpg" alt="Video Editing">
+                            </div>
+                            
+                            <!-- Video Content Items -->
+                            <div class="content-item">
+                                <video controls poster="bts(9).jpg">
+                                    <source src="videos/interview-highlight.mp4" type="video/mp4">
+                                    <source src="videos/interview-highlight.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts(10).jpg">
+                                    <source src="videos/field-report.mp4" type="video/mp4">
+                                    <source src="videos/field-report.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (1).jpg">
+                                    <source src="videos/documentary-excerpt.mp4" type="video/mp4">
+                                    <source src="videos/documentary-excerpt.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (2).jpg">
+                                    <source src="videos/breaking-news.mp4" type="video/mp4">
+                                    <source src="videos/breaking-news.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (3).jpg">
+                                    <source src="videos/political-analysis.mp4" type="video/mp4">
+                                    <source src="videos/political-analysis.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (2).jpg">
+                                    <source src="videos/ground-report.mp4" type="video/mp4">
+                                    <source src="videos/ground-report.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (2).jpg">
+                                    <source src="videos/election-coverage.mp4" type="video/mp4">
+                                    <source src="videos/election-coverage.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            <div class="content-item">
+                                <video controls poster="bts (2).jpg">
+                                    <source src="videos/exclusive-interview.mp4" type="video/mp4">
+                                    <source src="videos/exclusive-interview.webm" type="video/webm">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+<!-- Expertise Section -->
+<section id="expertise">
+    <div class="container">
+        <h2>Featured Work</h2>
+        <div class="expertise-grid animate-on-scroll">
+            <!-- TVC 1 -->
+            <a href="https://www.instagram.com/p/CiNWrblDd3p/?hl=en" target="_blank" class="expertise-card">
+                <img src="bts (2).jpg" alt="TVC Campaign 1" class="expertise-bg">
+                <div class="expertise-overlay">
+                    <div class="expertise-content">
+                        <h4>Television Commercial</h4>
+                        <p>Creative advertising campaign showcasing brand storytelling and visual impact</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TVC 2 -->
+            <a href="https://www.instagram.com/p/CpfjkUSDfiK/?hl=en" target="_blank" class="expertise-card">
+                <img src="bts (1).jpg" alt="TVC Campaign 2" class="expertise-bg">
+                <div class="expertise-overlay">
+                    <div class="expertise-content">
+                        <h4>Television Commercial</h4>
+                        <p>Innovative advertising content with compelling narrative and production quality</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TVC 3 -->
+            <a href="https://www.instagram.com/p/COSn3uyFo3g/?hl=en" target="_blank" class="expertise-card">
+                <img src="bts (2).jpg" alt="TVC Campaign 3" class="expertise-bg">
+                <div class="expertise-overlay">
+                    <div class="expertise-content">
+                        <h4>Television Commercial</h4>
+                        <p>Strategic brand communication through engaging visual storytelling</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- TVC 4 -->
+            <a href="https://www.instagram.com/p/CKMMTB4FUaL/?hl=en" target="_blank" class="expertise-card">
+                <img src="bts (2).jpg" alt="TVC Campaign 4" class="expertise-bg">
+                <div class="expertise-overlay">
+                    <div class="expertise-content">
+                        <h4>Television Commercial</h4>
+                        <p>Professional commercial production with creative direction and execution</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- YouTube Movie -->
+            <a href="https://www.youtube.com/watch?v=Lj8lxWOlTcA" target="_blank" class="expertise-card">
+                <img src="https://img.youtube.com/vi/Lj8lxWOlTcA/maxresdefault.jpg" alt="Moonlight Movie" class="expertise-bg">
+                <div class="expertise-overlay">
+                    <div class="expertise-content">
+                        <h4>Moonlight Movie</h4>
+                        <p>MADAM is the BOSS ka ATYACHAAR - Creative storytelling and production showcase</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2>Professional Contact</h2>
+                <div class="contact-grid animate-on-scroll">
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <h4>Email</h4>
+                        <p>avantikaroohi.kansal@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/avantika-kansal-b6867938/" class="social-link" title="LinkedIn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="http://x.com/Avvanteeka" class="social-link" title="Twitter">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/avantika_kansal/?hl=en" class="social-link" title="Instagram">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/kansal.avantika" class="social-link" title="Facebook">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+       <script>
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            targetSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    });
+
+    // Navbar background on scroll and active section highlighting
+    window.addEventListener('scroll', () => {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Active section highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 300)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Create floating particles
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 40;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    }
+
+    // Initialize particles
+    createParticles();
+
+    // Add stagger animation to content items
+    const contentItems = document.querySelectorAll('.content-item');
+    contentItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.animation = `fadeInUp 0.8s ease ${index * 0.1}s forwards`;
+    });
+
+    // Article Slider with Horizontal Scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeArticlesScroll();
+    });
+
+    function initializeArticlesScroll() {
+        const scrollWrapper = document.querySelector('.articles-scroll-wrapper');
+        const slider = document.getElementById('articlesSlider');
+        
+        if (!scrollWrapper || !slider) return;
+
+        // Smooth scroll with mouse wheel
+        scrollWrapper.addEventListener('wheel', function(e) {
+            // Only handle horizontal scrolling when mouse wheel is used
+            if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                e.preventDefault();
+                this.scrollLeft += e.deltaY > 0 ? 80 : -80;
+            }
+        }, { passive: false });
+
+        // Touch/Swipe support for mobile
+        let startX, scrollLeft, isDown = false;
+
+        scrollWrapper.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].pageX - this.offsetLeft;
+            scrollLeft = this.scrollLeft;
+        });
+
+        scrollWrapper.addEventListener('touchmove', function(e) {
+            if (!startX) return;
+            e.preventDefault();
+            const x = e.touches[0].pageX - this.offsetLeft;
+            const walk = (x - startX) * 2;
+            this.scrollLeft = scrollLeft - walk;
+        }, { passive: false });
+
+        scrollWrapper.addEventListener('touchend', function() {
+            startX = null;
+        });
+
+        // Mouse drag support for desktop
+        scrollWrapper.addEventListener('mousedown', function(e) {
+            isDown = true;
+            scrollWrapper.style.cursor = 'grabbing';
+            startX = e.pageX - this.offsetLeft;
+            scrollLeft = this.scrollLeft;
+        });
+
+        scrollWrapper.addEventListener('mouseleave', function() {
+            isDown = false;
+            scrollWrapper.style.cursor = 'grab';
+        });
+
+        scrollWrapper.addEventListener('mouseup', function() {
+            isDown = false;
+            scrollWrapper.style.cursor = 'grab';
+        });
+
+        scrollWrapper.addEventListener('mousemove', function(e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - this.offsetLeft;
+            const walk = (x - startX) * 2;
+            this.scrollLeft = scrollLeft - walk;
+        });
+
+        // Keyboard navigation
+        scrollWrapper.setAttribute('tabindex', '0');
+        scrollWrapper.addEventListener('keydown', function(e) {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    this.scrollLeft -= 370;
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    this.scrollLeft += 370;
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    this.scrollLeft = 0;
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    this.scrollLeft = this.scrollWidth;
+                    break;
+            }
+        });
+
+        // Professional hover effects for article cards
+        document.querySelectorAll('.article-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Only apply effect if not clicking a link
+                if (!e.target.closest('a')) {
+                    this.style.transform = 'translateY(-8px) scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                }
+            });
+        });
+    }
+
+    // Add professional typing effect to main title
+    const title = document.querySelector('h1');
+    const originalText = title.textContent;
+    title.textContent = '';
+    let i = 0;
+
+    function typeWriter() {
+        if (i < originalText.length) {
+            title.textContent += originalText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 100);
+        }
+    }
+
+    // Start typing effect after page loads
+    setTimeout(typeWriter, 1000);
+
+    // Professional parallax effect for profile section
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const profileImage = document.querySelector('.profile-image img');
+        if (profileImage) {
+            profileImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+        }
+    });
+
+    // Add professional fade-in effect for credentials
+    const credentials = document.querySelectorAll('.credential-item');
+    credentials.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-30px)';
+        item.style.transition = 'all 0.6s ease';
+        
+        setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateX(0)';
+        }, 2000 + (index * 200));
+    });
+
+    // Interactive content items
+    document.querySelectorAll('.content-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.background = 'linear-gradient(135deg, rgba(128, 128, 128, 0.15), rgba(160, 160, 160, 0.1))';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.background = 'linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(80, 80, 80, 0.5))';
+        });
+    });
+
+    // Professional loading animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+        sections.forEach((section, index) => {
+            section.style.animationDelay = `${index * 0.2}s`;
+        });
+    });
+
+    // Add smooth reveal animation for social links
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach((link, index) => {
+        link.style.opacity = '0';
+        link.style.transform = 'translateY(30px)';
+        link.style.transition = 'all 0.5s ease';
+        
+        setTimeout(() => {
+            link.style.opacity = '1';
+            link.style.transform = 'translateY(0)';
+        }, 3000 + (index * 150));
+    });
+
+    // Professional click feedback for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            // Add ripple effect
+            const ripple = document.createElement('span');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.left = '50%';
+            ripple.style.top = '50%';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.marginLeft = '-10px';
+            ripple.style.marginTop = '-10px';
+            
+            this.style.position = 'relative';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+
+    // Add CSS for ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // YouTube section animations
+    const youtubeContainers = document.querySelectorAll('.youtube-screenshot-container');
+    youtubeContainers.forEach((container, index) => {
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(50px)';
+        container.style.transition = 'all 0.8s ease';
+        
+        setTimeout(() => {
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+        }, 1000 + (index * 300));
+    });
+
+    // YouTube stats animation
+    const statItems = document.querySelectorAll('.stat-item');
+    statItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = 'all 0.6s ease';
+        
+        setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+        }, 1500 + (index * 200));
+    });
+
+    // Content Grid Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeContentGrid();
+    });
+
+    function initializeContentGrid() {
+        // Interactive hover effects for content items
+        const contentItems = document.querySelectorAll('.content-item');
+        
+        contentItems.forEach(item => {
+            // Mouse enter effect
+            item.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, rgba(128, 128, 128, 0.15), rgba(160, 160, 160, 0.1))';
+            });
+            
+            // Mouse leave effect
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'linear-gradient(135deg, rgba(60, 60, 60, 0.8), rgba(80, 80, 80, 0.5))';
+            });
+
+            // Add click feedback effect
+            item.addEventListener('click', function() {
+                // Add a subtle click animation
+                this.style.transform = 'translateY(-10px) scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Smooth scroll behavior for content grid
+        const contentGridWrapper = document.querySelector('.content-grid-wrapper');
+        
+        if (contentGridWrapper) {
+            // Add smooth scrolling with mouse wheel
+            contentGridWrapper.addEventListener('wheel', function(e) {
+                // Only handle horizontal scrolling
+                if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+                    e.preventDefault();
+                    this.scrollLeft += e.deltaY > 0 ? 50 : -50;
+                }
+            });
+
+            // Add keyboard navigation support
+            contentGridWrapper.setAttribute('tabindex', '0');
+            
+            contentGridWrapper.addEventListener('keydown', function(e) {
+                switch(e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        this.scrollLeft -= 100;
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        this.scrollLeft += 100;
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        this.scrollLeft = 0;
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        this.scrollLeft = this.scrollWidth;
+                        break;
+                }
+            });
+        }
+    }
+
+    // Video play/pause optimization
+    document.addEventListener('DOMContentLoaded', function() {
+        const videos = document.querySelectorAll('.content-item video');
+        
+        videos.forEach(video => {
+            // Pause other videos when one starts playing
+            video.addEventListener('play', function() {
+                videos.forEach(otherVideo => {
+                    if (otherVideo !== video && !otherVideo.paused) {
+                        otherVideo.pause();
+                    }
+                });
+            });
+
+            // Add loading optimization
+            video.setAttribute('preload', 'metadata');
+            
+            // Add error handling
+            video.addEventListener('error', function() {
+                console.log('Video failed to load:', video.src);
+            });
+        });
+    });
+
+    // Handle window resize for responsive behavior
+    window.addEventListener('resize', function() {
+        // Debounce resize events
+        clearTimeout(this.resizeTimeout);
+        this.resizeTimeout = setTimeout(function() {
+            // Reset scroll position on significant layout changes
+            const contentGridWrapper = document.querySelector('.content-grid-wrapper');
+            if (contentGridWrapper && window.innerWidth <= 768) {
+                contentGridWrapper.scrollLeft = 0;
+            }
+        }, 150);
+    });
+</script>
+    </body>
+</html>
